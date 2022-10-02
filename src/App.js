@@ -6,7 +6,7 @@ import Searcher from './components/Searcher';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPokemons } from './actions';
-import axios from "axios"
+import { getPokemon, getPokemonDetails } from './api';
 
 function App() {
 
@@ -14,14 +14,15 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getPokemons = async () => {
-      await  axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=151")
-      .then((res) => dispatch(setPokemons(res.data.results)))
-      .catch((err) => console.log(err));
-    }
+    const fetchPokemons = async () => {
+      const pokemonsRes = await getPokemon();
+      const pokemonsDetailed = await Promise.all(
+        pokemonsRes.map((pokemon) => getPokemonDetails(pokemon))
+      );
+      dispatch(setPokemons(pokemonsDetailed));
+    };
 
-    getPokemons();
+    fetchPokemons();
   }, []);
 
   return (
