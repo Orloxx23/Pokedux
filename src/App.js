@@ -1,19 +1,23 @@
 import { Col } from 'antd';
-import { connect } from 'react-redux';
-import { setPokemons as setPokemonsActions } from './actions';
 import './App.css';
 import logo from './statics/logo.svg';
 import PokemonList from './components/PokemonList';
 import Searcher from './components/Searcher';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPokemons } from './actions';
 import axios from "axios"
 
-function App({ pokemons, setPokemons }) {
+function App() {
+
+  const pokemons = useSelector(state => state.pokemons);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const getPokemons = async () => {
       await  axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=151")
-      .then((res) => setPokemons(res.data.results))
+      .then((res) => dispatch(setPokemons(res.data.results)))
       .catch((err) => console.log(err));
     }
 
@@ -33,12 +37,4 @@ function App({ pokemons, setPokemons }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  pokemons: state.pokemons,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setPokemons: (value) => dispatch(setPokemonsActions(value)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
