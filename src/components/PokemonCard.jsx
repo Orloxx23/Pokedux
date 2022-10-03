@@ -17,6 +17,7 @@ const PokemonCard = ({ name, image, types, id, favorite }) => {
     title={name}
     cover={<img src={image} alt={name}/>}
     extra={<StarButton isFavorite={favorite} onClick={() => handleOnFavortie()}/>}
+    style={{ borderRadius: 25 }}
     >
         <Meta description={typesString}/>
     </Card>

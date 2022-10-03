@@ -9,7 +9,7 @@ const Searcher = () => {
     dispatch(setSearch(e));
   }
 
-  return <Input placeholder="Search..." onChange={(e) => handleSearch(e.target.value)}/>
+  return <Input placeholder="Buscar..." onChange={(e) => handleSearch(e.target.value)}/>
 }
 
 export default Searcher;
