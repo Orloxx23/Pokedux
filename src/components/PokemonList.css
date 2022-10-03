@@ -6,3 +6,9 @@
     margin-top: 3rem;
     padding: 0 3rem 3rem;
 }
+
+@media (max-width: 768px) {
+    .PokemonList{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
