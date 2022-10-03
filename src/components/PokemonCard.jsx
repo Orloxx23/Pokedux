@@ -1,8 +1,8 @@
 import { Card } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { useDispatch } from 'react-redux';
-import { setFavortie } from '../actions';
 import StarButton from './StarButton';
+import { setFavorite } from '../slices/dataSlice';
 
 const PokemonCard = ({ name, image, types, id, favorite }) => {
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const PokemonCard = ({ name, image, types, id, favorite }) => {
     const typesString = types.map((type) => type.type.name).join(', ');
     
     const handleOnFavortie = () => {
-        dispatch(setFavortie({pokemonId: id}))
+        dispatch(setFavorite({pokemonId: id}))
     }
 
     return <Card 
