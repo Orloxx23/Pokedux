@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
   const pokemons = useSelector((state) => state.data.pokemons, shallowEqual);
-
+  const search = useSelector((state) => state.data.search);
   const loading = useSelector((state) => state.ui.loading);
 
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function App() {
           <Spin spinning size='large' />
         </Col>
       ) : (
-        <PokemonList pokemons={pokemons} />
+        <PokemonList pokemons={pokemons} search={search}/>
       )}
     </div>
   );
